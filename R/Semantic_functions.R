@@ -7,7 +7,7 @@
 #' @returns List of words from the text
 #' @export
 #'
-#' @examples Read_text(~/exampleNegative.txt)
+#' @examples Read_text("exampleNegative.txt")
 Read_text <- function(x) {
   temp <- read.delim(x, header = F, sep = "\n", stringsAsFactors = FALSE)
   temp1 <- paste(temp$V1, collapse = " ")
@@ -70,7 +70,7 @@ sentiment_search <- function(doc_words, sentiment_patterns) {
 #' @returns synthesized results as list with the predictive tendency of the sentiment from the reader perspective
 #' @export
 #'
-#' @examples analyze_sentiment("~/Examen_1/Example_negative.txt", Positive, Negative)
+#' @examples analyze_sentiment("Example_negative.txt", Positive, Negative)
 analyze_sentiment <- function(x, positive, negative) {
   doc_words <- Read_text(x)
   pos_result <- sentiment_search(doc_words, positive)
@@ -85,16 +85,3 @@ analyze_sentiment <- function(x, positive, negative) {
   )
   return(result)
 }
-
-
-# How to be used.
-
-word_doc <- Read_text("~/Documents/Courses/Intermediate_R_Data_Science_and_Visualization_Techniques_beyong_base_R/Examen_1/Example_negative.txt")
-
-Negative <- c("overwhelm*", "nause*", "frustrat*", "trap*")
-Positive <- c("cooperate", "reason*")
-
-sentiment_search(word_doc, Negative)
-test1<- sentiment_search(word_doc, Negative)
-test2 <- analyze_sentiment("~/Documents/Courses/Intermediate_R_Data_Science_and_Visualization_Techniques_beyong_base_R/Examen_1/Example_negative.txt", Positive, Negative)
-
