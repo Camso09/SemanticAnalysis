@@ -85,3 +85,16 @@ analyze_sentiment <- function(x, positive, negative) {
   )
   return(result)
 }
+
+
+# How to be used.
+
+word_doc <- Read_text("~/Documents/Courses/Intermediate_R_Data_Science_and_Visualization_Techniques_beyong_base_R/Examen_1/Example_negative.txt")
+
+Negative <- c("overwhelm*", "nause*", "frustrat*", "trap*")
+Positive <- c("cooperate", "reason*")
+
+Matched_with_negative <- sentiment_search(word_doc, Negative)
+
+Synthesis <- analyze_sentiment("~/Documents/Courses/Intermediate_R_Data_Science_and_Visualization_Techniques_beyong_base_R/Examen_1/Example_negative.txt", Positive, Negative)
+
