@@ -16,5 +16,5 @@ List of words from the text
 Read_text: Text_to_list_words
 }
 \examples{
-Read_text(~/exampleNegative.txt)
+Read_text("exampleNegative.txt")
 }

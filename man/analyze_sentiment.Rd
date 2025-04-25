@@ -20,5 +20,5 @@ synthesized results as list with the predictive tendency of the sentiment from t
 analyze_sentiment
 }
 \examples{
-analyze_sentiment("~/Examen_1/Example_negative.txt", Positive, Negative)
+analyze_sentiment("Example_negative.txt", Positive, Negative)
 }
