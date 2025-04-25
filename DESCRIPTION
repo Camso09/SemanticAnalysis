@@ -2,7 +2,8 @@ Package: SemanticAnalysis
 Title: Semantic perspective
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
+    person("Mahamadou", "Camara", role = "ctb",
+           comment = "mahamadou.camara")
 Description: This package is to use to analysis the readers pespective
     based on the wording. Depending on how positive or negative the
     wording can sound, the algorithm will predict the overall effect on
