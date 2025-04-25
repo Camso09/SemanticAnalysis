@@ -1,31 +1,35 @@
-
-
-#' Read_text: Text_to_list_words
+#' Title List of words to be analyzed
 #'
-#' @param x Path to the text to be analysed.
+#' @param x Path to the file
 #'
-#' @returns List of words from the text
+#' @returns list of words from the text to be analysed.
 #' @export
 #'
-#' @examples Read_text("exampleNegative.txt")
+#' @examples
+#' Read_text("~/Documents/Courses/Intermediate_R_Data_Science_and_Visualization_Techniques_beyong_base_R/Examen_1/Example_negative.txt")
 Read_text <- function(x) {
   temp <- read.delim(x, header = F, sep = "\n", stringsAsFactors = FALSE)
-  temp1 <- paste(temp$V1, collapse = " ")
-  sentences <- unlist(strsplit(temp1, "(?<=[.!?])\\s+", perl = TRUE))
+  temp_1 <- paste(temp$V1, collapse = " ")
+
+  sentences <- unlist(strsplit(temp_1, "(?<=[.,!?])\\s+", perl = TRUE))
+
   analysed_text <- data.frame(sentence = sentences, stringsAsFactors = FALSE)
-  analysed_text <- tolower(analysed_text)
-  cleaned_text <- gsub("[[:punct:]]", "", analysed_text)
+  analysed_text$sentence <- tolower(analysed_text$sentence)
+
+  cleaned_text <- gsub("[[:punct:]]", "", paste(analysed_text$sentence, collapse = " ")) # paste(text_vector, collapse = " ")
+
   word_list <- unlist(strsplit(cleaned_text, "\\s+"))
+  word_list <- word_list[word_list != ""]
   return(word_list)
 }
 
 
-#' sentiment_search: Word_search_and_match
+#' Title Sentiments matching word in the text
 #'
-#' @param doc_words Words list from the text
+#' @param doc_words document word list
 #' @param sentiment_patterns vectors of positive or negative pattern words (vector) to look for in the the text we are analyzing. Vectors enable an unknown prefix or suffix.
 #'
-#' @returns list of the number of matched pattern in the text.
+#' @returns list of the number of matched pattern in the text an the exact words.
 #' @export
 #'
 #' @examples sentiment_search(word_doc, Negative)
@@ -60,17 +64,16 @@ sentiment_search <- function(doc_words, sentiment_patterns) {
   return(list(count = match_count, words = matched_words))
 }
 
-
-#' analyze_sentiment
+#' Title
 #'
-#' @param x Path to the text to be analysed.
-#' @param positive vectors of positive pattern words (vector) to look for in the the text we are analyzing. Vectors enable an unknown prefix or suffix.
-#' @param negative vectors of negative pattern words (vector) to look for in the the text we are analyzing. Vectors enable an unknown prefix or suffix.
+#' @param x Path to the file
+#' @param positive vectors of positive pattern words (vector) to look for in the the text we are analyzing. These Vectors enable an unknown prefix or suffix by use of (*) after the root word.
+#' @param negative vectors of negative pattern words (vector) to look for in the the text we are analyzing. These Vectors enable an unknown prefix or suffix by use of (*) after the root word.
 #'
-#' @returns synthesized results as list with the predictive tendency of the sentiment from the reader perspective
+#' @returns synthetised results as list with the tendency of the sentiment from the reader perspective
 #' @export
 #'
-#' @examples analyze_sentiment("Example_negative.txt", Positive, Negative)
+#' @examples analyze_sentiment("~/Examen_1/Example_negative.txt", Positive, Negative)
 analyze_sentiment <- function(x, positive, negative) {
   doc_words <- Read_text(x)
   pos_result <- sentiment_search(doc_words, positive)
@@ -83,18 +86,7 @@ analyze_sentiment <- function(x, positive, negative) {
     positive_words = unique(pos_result$words),
     negative_words = unique(neg_result$words)
   )
+
   return(result)
+
 }
-
-
-# How to be used.
-
-word_doc <- Read_text("~/Documents/Courses/Intermediate_R_Data_Science_and_Visualization_Techniques_beyong_base_R/Examen_1/Example_negative.txt")
-
-Negative <- c("overwhelm*", "nause*", "frustrat*", "trap*")
-Positive <- c("cooperate", "reason*")
-
-Matched_with_negative <- sentiment_search(word_doc, Negative)
-
-Synthesis <- analyze_sentiment("~/Documents/Courses/Intermediate_R_Data_Science_and_Visualization_Techniques_beyong_base_R/Examen_1/Example_negative.txt", Positive, Negative)
-
