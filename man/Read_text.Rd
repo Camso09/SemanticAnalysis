@@ -16,5 +16,5 @@ list of words from the text to be analysed.
 Title List of words to be analyzed
 }
 \examples{
-Read_text("~/Documents/Courses/Intermediate_R_Data_Science_and_Visualization_Techniques_beyong_base_R/Examen_1/Example_negative.txt")
+Read_text("./Example/Example_negative.txt")
 }

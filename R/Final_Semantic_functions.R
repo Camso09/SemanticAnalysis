@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-#' Read_text("~/Documents/Courses/Intermediate_R_Data_Science_and_Visualization_Techniques_beyong_base_R/Examen_1/Example_negative.txt")
+#' Read_text("./Example/Example_negative.txt")
 Read_text <- function(x) {
   temp <- read.delim(x, header = F, sep = "\n", stringsAsFactors = FALSE)
   temp_1 <- paste(temp$V1, collapse = " ")
@@ -90,3 +90,18 @@ analyze_sentiment <- function(x, positive, negative) {
   return(result)
 
 }
+
+
+#* @Usage_example
+
+#' @examples
+#' # example code
+#' # word_doc <- Read_text("./Example/Example_negative.txt")
+
+#' # Negative <- c("overwhelm*", "nause*", "frustrat*", "trap*")
+#* # Positive <- c("cooperate", "reason*")
+
+
+#' # test1<- sentiment_search(word_doc, Negative)
+#' # test2 <- analyze_sentiment("./Example/Example_negative.txt", Positive, Negative)
+
